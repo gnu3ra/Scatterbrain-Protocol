@@ -84,6 +84,14 @@ Mobile status:
           6: stationary pocketphone screen on app open
           user is actively messaging and probably sitting down
 	  feel free to be active
+      
+      
+     
+Overwhelmed: 
+Character, 1-5
+Arbetrary scale of network congestion. Set to high if many messages per second
+are recieved. The sum of all advertised Overwhelm counters determines message send rate
+in order to fight congestion.
 
 
 =====================
