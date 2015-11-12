@@ -1,0 +1,201 @@
+The Scatterbrain protocol BETA
+0.1
+
+##########################################
+########### INTRO ########################
+##########################################
+
+This is a simple text based protocol on top of
+bluetooth low energy. It has no concepts of
+connections and can exchange snippits of text
+or *very small* images or binary blobs
+automatically, accross short distances,
+and in the background.
+
+Given that this is mostly implimented in Java, the basic unit
+is a character as represented in a Java String class. The actual
+representation in BLE is abstracted for compatability with
+varying hardware (Android, iOS, embedded beacon, bluesniper, etc)
+
+
+
+##########################################
+########### PROTOCOL #####################
+##########################################
+
+Basic actions
+
+NOTE: all packets and dumps (weird ascii towers on this page) represent a continuous String. each section
+(separated by +++++++) is escaped in the string by a unicode snowman (☃). No, I am NOT kidding. If you want to
+send a snowman in your message, it will be autoescaped as ☃☃ in the protocol. 
+
+
+=== SCAN / REPLY ===
+[handled by bluetooth hardware / firmware]
+
+
+
+=== ADVERTISE ====
+This is mainly to signal that the device is runnign the app
+and to exchange info on device state in an attempt to
+determine if the user is mobile or stationary. It is attempted,
+but NOT guaranteed that this message will fit in a single
+20 byte BLE packet. 
+
+version # is two chars, one representing protocol version and one being
+a "type specifier" specifying the type of packet. 
+types:
+	0: advertise
+	1: dump
+
+
+FLAGS is a string consisting of 4 characters 
+
+      0           1               2            3
+Device type  mobile status   overwhelmed      null
+
+Device type:
+       Determines what is transmitting.
+       1: android
+       2: ios
+       3: embedded base
+       4: dumb repeater
+
+Mobile status:
+       What the "speed" of the transmitter
+       	  1: I am an internet connected wormhole / relay.
+	  PRIORITIZE ME SENPAI DESU!
+
+	  2: I am a bluesniper / hacked yagi antenna.
+	  Give high priority.
+
+	  3: pocketphone, but I manually set high priority due to intentional wardriving,
+	  impending travel, or illegal mods.
+	  Give high priority.
+
+	  
+	  4:  pocketphone screen off
+	  user may be mobile. keep messages short, but give priority
+	  
+	  5: stationary pocketphone screen on
+	  user is probably doing other stuff, but not moving
+	  anticipate movement
+	  
+          6: stationary pocketphone screen on app open
+          user is actively messaging and probably sitting down
+	  feel free to be active
+
+
+=====================
+--version #----------|
+=====================
+--TARGET-------------|
+++++++++++++++++++++++
+--FLAGS--------------|
+++++++++++++++++++++++
+
+
+
+
+
+
+
+
+=== DUMP ===
+This is a large (multipacket) burst of data meant to actually relay a message.
+Standard procedure is to respond to ADVERTISes with a DUMP.
+
+version # is two chars, one representing protocol version and one being
+a "type specifier" specifying the type of packet. 
+types:
+	0: advertise
+	1: dump (it is dump this time)
+
+
+TARGET is the last characters (non-vendor string) of the MAC address of the sender.
+Used to address a message to a device. 0 if broadcast
+
+UUID
+An id for the message. Used for replies and signing large string.
+
+TTL
+Single char representing how many hops until message is auto deleted
+
+
+REPLYTO
+If not 0, A uuid of the message that this message is replying to. This
+signals the device to prioritize sending any message in the chain that
+is stored.
+
+
+RECIPIENT
+If not 0, than it is active.
+The first character determines the mode.
+1: this is an identity key of a user that the message is addressed to. Signifies message is
+pubkey encrypted. This may not be ideal for long distances, as the message is not
+guaranteed to reach the user with the private key.
+
+2: String is a coordinate set, latitude, longitude, comma separated. Eventually there will be a way for nearby
+devices to compare coordinates and help a message home in on a location eventually. 
+DO NOT USE THIS. IT IS A HORRIBLE IDEA
+
+
+SUBJECT
+Short (15 char) string containing the subject of the body. set to && if body is binary.
+
+BODY
+HUGE block of text or base64 encoded binary. This is the content of the message
+
+FROM
+A userid of the user who sent the message. 0 for anonymous
+
+FLAGS
+random junk that is not used now. May be used for intelligent routing in the future.
+
+SIG
+Cryptographic signature of the message. Signed by the user. 
+
+=====================
+----------------------
+--version #----------|
++++++++++++++++++++++
+--TARGET-------------|
+++++++++++++++++++++++
+--UUID---------------|
+++++++++++++++++++++++
+--TTL----------------|
+++++++++++++++++++++++
+--REPLYTO------------|
+++++++++++++++++++++++
+--RECIPIENT----------|
+++++++++++++++++++++++
+--SUBJECT------------|
+++++++++++++++++++++++
+---------------------|
+---------------------|
+--BODY---------------|
+---------------------|
+---------------------|
+++++++++++++++++++++++
+--FROM---------------|
+++++++++++++++++++++++
+--FLAGS--------------|
+++++++++++++++++++++++
+--SIG----------------|
+++++++++++++++++++++++
+
+
+
+
+
+general protocol procedure
+
+
+while true {
+      ADVERTISE
+      if(recieve(incomingAdvertise)) {
+	if(/* special priority consideration magic */) {
+	      DUMP(TARGET=incomingAdvertise.TARGET)
+	}
+}
+}
