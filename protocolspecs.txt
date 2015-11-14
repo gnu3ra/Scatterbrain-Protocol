@@ -62,20 +62,16 @@ Device type:
        4: dumb repeater
 
 Mobile status:
-       What the "speed" of the transmitter
-       	  1: I am an internet connected wormhole / relay.
-	  PRIORITIZE ME SENPAI DESU!
+       What the "speed" of the transmitter. 1-4 are in order of priority, 5 and 6 are special cases for
+       when the user is activly using the phone. 
+       	  1: PRIORITIZE ME SENPAI DESU!
 
-	  2: I am a bluesniper / hacked yagi antenna.
-	  Give high priority.
+	  2: Give high priority.
 
-	  3: pocketphone, but I manually set high priority due to intentional wardriving,
-	  impending travel, or illegal mods.
-	  Give high priority.
+	  3: give medium priority.
 
 	  
-	  4:  pocketphone screen off
-	  user may be mobile. keep messages short, but give priority
+	  4: low priority
 	  
 	  5: stationary pocketphone screen on
 	  user is probably doing other stuff, but not moving
