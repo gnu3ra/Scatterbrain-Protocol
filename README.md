@@ -15,6 +15,8 @@ High bandwidth internet-less 'lazy mesh' with filesharing, service discovery, an
 Scatterbrain is a text based protocol capable of operating over many separate communication methods, including wifi p2p, bluetooth low energy, and physical dead drops. Scatterbrain aims to roughly follow the Wind concept here:[WindFarm]( https://github.com/n8fr8/WindFarm).
 Particularly, Scatterbrain aims to transfer large-ish files throughout the mesh, using a semi-persistent datastore, BLE based service discovery, and high bandwidth wifi tunnels to exchange files. Filesharing services, web-like sites, or even even physical events can be advertised throughout the network. 
 
+NOTE: This is a generic protocol with no particular use in mind. Possible uses can include text-based messaging, filesharing, news/warning systems, etc. I will make applications for Scatterbrain once I prove it works.
+
 ## Structure
 Scatterbrain is very high level (basically sending raw text) in order to work over more obscure transports like BLE and static QR codes. 
 
