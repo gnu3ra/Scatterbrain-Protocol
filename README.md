@@ -63,12 +63,13 @@ bit 5: internet access
 
 
 #### Block Data
-This is a generic data packet. Also used for 'tunneled' 3rd party protocols. It can be used in response to another packet, usually as a carrier for generic mesh data or system related stuffs. Insanely general purpose. This packet uses large arbitrary sizes, and will almost always not fit on a single BLE advertise.   
+This is a generic data packet. Also used for 'tunneled' 3rd party protocols. It can be used in response to another packet, usually as a carrier for generic mesh data or system related stuffs. Insanely general purpose. This packet uses large arbitrary sizes, and will almost always not fit on a single BLE advertise. The body can be either text based, or binary. The textorbin byte is either set to 1 (text) or 0 (bin)   
 
 ```
 <<header id=1>>(1)  
 <sender mac>(6)  
 <reciever mac>(6)  
+<textorbin>(1)  
 <body>(variable)  
 ```
 
