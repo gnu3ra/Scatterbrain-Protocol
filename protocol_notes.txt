@@ -1,0 +1,5 @@
+Current problems:
+	Priority has the potential to be abused. I really need some sort of handshake between nearby users
+	to set the priority. Maybe prioritized messaging should just be dumped?
+
+	
