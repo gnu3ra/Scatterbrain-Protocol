@@ -26,13 +26,14 @@ Packets are represented here with variants of `<name>(size)` Each packet has a 1
 This is mainly to signal that a device is present, and to announce its capabilities. This will (hopefully, but not guaranteed) fit in a single 20 byte BLE advertise. 
 
 
-`<<header>>(1)`  
-`<device type>(1)`  
-`<mobile status>(1)`  
-`<protocol version>(2)`  
-`<congestion byte>(1)`  
-`<hardware services>(1)`  
-
+```
+<<header id=0>>(1)  
+<device type>(1)  
+<mobile status>(1)  
+<protocol version>(2)  
+<congestion byte>(1)  
+<hardware services>(1)  
+```
 
 Device type (integer)    
 0: Android  
@@ -64,10 +65,14 @@ bit 5: internet access
 This is a generic data packet. Also used for 'tunneled' 3rd party protocols. It can be used in response to another packet, usually as a carrier for generic mesh data or system related stuffs. Insanely general purpose. This packet uses large arbitrary sizes, and will almost always not fit on a single BLE advertise.   
 
 ```
-<<Header>>(1)  
-
+<<header id=1>>(1)  
+<sender mac>(6)  
+<reciever mac>(6)  
+<body>(variable)  
 
 ```
+
+If the reciever mac is all 0s, this is a broadcast packet.
 
 
 
