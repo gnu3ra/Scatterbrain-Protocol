@@ -1,4 +1,5 @@
 # Scatterbrain Protocol:  2.01
+Basic protocol for https://github.com/gnu3ra/Scatterbrain.
 High bandwidth internet-less 'lazy mesh' with filesharing, service discovery, and no constant connections needed. 
 
 
@@ -69,7 +70,6 @@ This is a generic data packet. Also used for 'tunneled' 3rd party protocols. It 
 <sender mac>(6)  
 <reciever mac>(6)  
 <body>(variable)  
-
 ```
 
 If the reciever mac is all 0s, this is a broadcast packet.
