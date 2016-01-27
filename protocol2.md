@@ -77,4 +77,9 @@ If the reciever mac is all 0s, this is a broadcast packet.
 
 
 #### Query Services
-This is sent out to ask what software based services the target receiver offers (like filesharing, http-web site, etc.). This is immediately followed by a response 
+This is sent out to ask what software based services the target receiver offers (like filesharing, http-web site, etc.). This is immediately followed by a response in the form of block data. 
+
+```
+<<header id=2>>(1)  
+
+```
