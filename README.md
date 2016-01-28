@@ -17,6 +17,9 @@ Particularly, Scatterbrain aims to transfer large-ish files throughout the mesh,
 
 NOTE: This is a generic protocol with no particular use in mind. Possible uses can include text-based messaging, filesharing, news/warning systems, etc. I will make applications for Scatterbrain once I prove it works.
 
+## Transport protocols
+The individual transport protocols for scatterbrain differ and use varying individual protocols. Current model will support bluetooth LE and wifi p2p. More coming later.
+
 ## Structure
 Scatterbrain is very high level (basically sending raw text) in order to work over more obscure transports like BLE and static QR codes. 
 
