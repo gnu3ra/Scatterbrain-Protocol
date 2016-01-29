@@ -11,14 +11,17 @@ High bandwidth internet-less 'lazy mesh' with filesharing, service discovery, an
 * Fully automatic, easy, zero-configuration
 
 
+## Transport protocols
+The low level individual transport protocols for scatterbrain differ and use varying individual protocols. Current model will support bluetooth LE and wifi p2p. More coming later.
+
+#### Bluetooth Low Energy
+This is the most desired transport, as it is cross platform and easy on battery life. BLE is a asynchronous, non-connection based stream with 20 byte packets. We use hex to make it easier. Current implementation uses GitGarage's BLEMingle (https://github.com/GitGarage/BLEMingleDroid) as I am to lazy to implement synchronous BLE myself. 
+
 ## Basic Protocol Overview
 Scatterbrain is a text based protocol capable of operating over many separate communication methods, including wifi p2p, bluetooth low energy, and physical dead drops. Scatterbrain aims to roughly follow the Wind concept here:[WindFarm]( https://github.com/n8fr8/WindFarm).
 Particularly, Scatterbrain aims to transfer large-ish files throughout the mesh, using a semi-persistent datastore, BLE based service discovery, and high bandwidth wifi tunnels to exchange files. Filesharing services, web-like sites, or even even physical events can be advertised throughout the network. 
 
 NOTE: This is a generic protocol with no particular use in mind. Possible uses can include text-based messaging, filesharing, news/warning systems, etc. I will make applications for Scatterbrain once I prove it works.
-
-## Transport protocols
-The individual transport protocols for scatterbrain differ and use varying individual protocols. Current model will support bluetooth LE and wifi p2p. More coming later.
 
 ## Structure
 Scatterbrain is very high level (basically sending raw text) in order to work over more obscure transports like BLE and static QR codes. 
