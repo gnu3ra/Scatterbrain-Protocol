@@ -61,7 +61,7 @@ Congestion Byte (integer)
 Indicates how overwhelmed the sender is on a scale of 2 to 127. Basically used to help avoid clients that are in areas of congestion. 0 means manual high priority, IE the user is aggressively 'wardriving', and 1 means manual low priority, IE user is in a fast moving car and being nice to the network.     
 
 Hardware Services  
-Mask of 8 bits, each set individually to notify the receiving end what hardware the client has.   
+Mask of 8 bits, each set individually to notify the receiving end what hardware the client has. Bluetooth LE is implied because you would need to have it to recieve the message   
 bit 0: wifi p2p  
 bit 1: wifi infrastructure client  
 bit 2: wifi infrastructure AP  
