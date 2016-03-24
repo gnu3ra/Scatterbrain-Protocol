@@ -62,11 +62,11 @@ Indicates how overwhelmed the sender is on a scale of 2 to 127. Basically used t
 
 Hardware Services  
 Mask of 8 bits, each set individually to notify the receiving end what hardware the client has.   
-bit 1: wifi p2p  
-bit 2: wifi infrastructure client  
-bit 3: wifi infrastructure AP  
-bit 4: bluetooth file transfer  
-bit 5: internet access  
+bit 0: wifi p2p  
+bit 1: wifi infrastructure client  
+bit 2: wifi infrastructure AP  
+bit 3: bluetooth file transfer  
+bit 4: internet access  
 (more bits as needed in future versions)  
 
 
