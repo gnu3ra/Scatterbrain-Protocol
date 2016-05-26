@@ -1,6 +1,6 @@
 # Scatterbrain Protocol:  2.01
 Basic protocol for https://github.com/gnu3ra/Scatterbrain.
-High bandwidth internet-less 'lazy mesh' with filesharing, service discovery, and no constant connections needed. 
+High bandwidth internet-less 'lazy mesh' with filesharing, service discovery, and no constant connections needed. NOTE: these specs will be changed/rewritten quite a lot until I get a working prototype. Be careful.
 
 
 ## Overall Goals:
@@ -11,11 +11,11 @@ High bandwidth internet-less 'lazy mesh' with filesharing, service discovery, an
 * Fully automatic, easy, zero-configuration
 
 
-## Transport protocols
-The low level individual transport protocols for scatterbrain differ and use varying individual protocols. Current model will support bluetooth LE and wifi p2p. More coming later.
+## Note on Bluetooth LE
+It turns out that only a select few phones have the LE advertise emulation capabilities needed for Scatterbrain to work. The scatterbrain protocol is being rewritten to work with wifi direct and similar more standardized transport layers. 
 
-#### Bluetooth Low Energy
-This is the most desired transport, as it is cross platform and easy on battery life. BLE is a asynchronous, non-connection based stream with 20 byte packets. We use hex to make it easier. Current implementation uses GitGarage's BLEMingle (https://github.com/GitGarage/BLEMingleDroid) as I am to lazy to implement synchronous BLE myself. 
+## Transport protocols
+The low level individual transport protocols for scatterbrain differ and use varying individual protocols. Current model will support wifi p2p and possibly bluetooth. More coming later.
 
 ## Basic Protocol Overview
 Scatterbrain is a text based protocol capable of operating over many separate communication methods, including wifi p2p, bluetooth low energy, and physical dead drops. Scatterbrain aims to roughly follow the Wind concept here:[WindFarm]( https://github.com/n8fr8/WindFarm).
