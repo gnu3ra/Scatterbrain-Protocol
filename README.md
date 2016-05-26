@@ -32,32 +32,22 @@ The BLE mesh is the backbone of a Scatterbrain network. It preforms service disc
 Packets are represented here with variants of `<name>(size)` Each packet has a 1 byte header with a fixed value identifying they type of packet and protocol version. The header can also be used to distinguish a Scatterbrain advertise from a normal BLE advertise. A packet can be more than 20 bytes, but has to be fragmented at a low level.  Here are the basic 'packet' units we have so far for BLE:
 
 #### Advertise
-This is mainly to signal that a device is present, and to announce its capabilities. This will (hopefully, but not guaranteed) fit in a single 20 byte BLE advertise. 
+This is mainly to signal that a device is present, and to announce its capabilities. This may not be a physical 'packet' for some systems, as it may use an existing service discovery framework at a lower level 
 
-
-```
-<<header id=0>>(1)  
-<device type>(1)  
-<mobile status>(1)  
-<protocol version>(2)  
-<congestion byte>(1)  
-<hardware services>(1)  
-```
-
-Device type (integer)    
+Device type 
 0: Android  
 1: iOS  
 2: Embedded GNU/Linux  
 
-Mobile status (integer)  
+Mobile status 
 0: Stationary (emplacement / server)  
 1: Mobile  
 2: Highly mobile  
 
-Protocol Version (integer)  
+Protocol Version 
 Just here to prevent version issues.  
 
-Congestion Byte (integer)  
+Congestion Byte
 Indicates how overwhelmed the sender is on a scale of 2 to 127. Basically used to help avoid clients that are in areas of congestion. 0 means manual high priority, IE the user is aggressively 'wardriving', and 1 means manual low priority, IE user is in a fast moving car and being nice to the network.     
 
 Hardware Services  
