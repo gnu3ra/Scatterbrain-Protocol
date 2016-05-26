@@ -27,9 +27,8 @@ NOTE: This is a generic protocol with no particular use in mind. Possible uses c
 Scatterbrain is very high level (basically sending raw text) in order to work over more obscure transports like BLE and static QR codes. 
 
 
-## BLE Mesh Packet Types
-The BLE mesh is the backbone of a Scatterbrain network. It preforms service discovery and transfer control for any higher bandwidth component. The basic unit here is a byte.
-Packets are represented here with variants of `<name>(size)` Each packet has a 1 byte header with a fixed value identifying they type of packet and protocol version. The header can also be used to distinguish a Scatterbrain advertise from a normal BLE advertise. A packet can be more than 20 bytes, but has to be fragmented at a low level.  Here are the basic 'packet' units we have so far for BLE:
+## Packet Types
+The scatterbrain has two 'packet' types: Advertise and Block Data. NOTE: these are more like variable length stanzas, but I still call them 'packets'.
 
 #### Advertise
 This is mainly to signal that a device is present, and to announce its capabilities. This may not be a physical 'packet' for some systems, as it may use an existing service discovery framework at a lower level 
