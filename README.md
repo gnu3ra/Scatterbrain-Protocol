@@ -58,6 +58,9 @@ bit 3: bluetooth file transfer
 bit 4: internet access  
 (more bits as needed in future versions)  
 
+LUID
+A random string of 6 bytes, this serves as a unique identifier of a device. This can be randomized when not connected for privacy 
+
 
 #### Block Data
 This is a generic data packet. Also used for 'tunneled' 3rd party protocols. It can be used in response to another packet, usually as a carrier for generic mesh data or system related stuffs. Insanely general purpose. This packet uses large arbitrary sizes, and will almost always not fit on a single BLE advertise. The body can be either text based, or binary. The textorbin byte is either set to 1 (text) or 0 (bin)   
