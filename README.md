@@ -79,3 +79,12 @@ This is a generic data packet, mainly used for user applications. It can be used
 This stanza is used to query a device for futher information not included in a block data stanza
 
 <<header id=2>>(1)
+<<query mask>>(1)
+<<user defined query mask>>(4)
+
+
+Query mask:
+Used to request scatterbrain specific information from a remote device. The device responds with a block data stanza. A mask of one byte.
+
+bit 0:
+Request unique id: device responds with a public key used for identifying signed messages from the device
