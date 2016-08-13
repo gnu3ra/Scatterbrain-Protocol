@@ -67,8 +67,8 @@ This is a generic data packet. Also used for 'tunneled' 3rd party protocols. It 
 
 ```
 <<header id=1>>(1)  
-<sender mac>(12)  
-<reciever mac>(12)  
+<sender luid>(6)  
+<reciever luid>(6)  
 <textorbin>(1)  
 <body>(variable)  
 ```
