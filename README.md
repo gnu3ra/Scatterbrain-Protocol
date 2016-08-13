@@ -27,11 +27,11 @@ NOTE: This is a generic protocol with no particular use in mind. Possible uses c
 Scatterbrain is very high level (basically sending raw text) in order to work over more obscure transports like BLE and static QR codes. 
 
 
-## Packet Types
-The scatterbrain has two 'packet' types: Advertise and Block Data. NOTE: these are more like variable length stanzas, but I still call them 'packets'.
+## Stanza types
+The scatterbrain protocol's communication is done in predefined 'stanzas'
 
 #### Advertise
-This is mainly to signal that a device is present, and to announce its capabilities. This may not be a physical 'packet' for some systems, as it may use an existing service discovery framework at a lower level 
+Used to announce a device and its capabilities. This may not be a physical 'packet' for some systems, as it may use an existing service discovery framework at a lower level.
 
 Device type 
 0: Android  
@@ -59,28 +59,23 @@ bit 4: internet access
 (more bits as needed in future versions)  
 
 LUID
-A random string of 6 bytes, this serves as a unique identifier of a device. This can be randomized when not connected for privacy 
+A random string of 6 bytes, this serves as a unique identifier of a device in a local cluster or mesh. This can be randomized when not connected for privacy 
 
 
 #### Block Data
-This is a generic data packet. Also used for 'tunneled' 3rd party protocols. It can be used in response to another packet, usually as a carrier for generic mesh data or system related stuffs. Insanely general purpose. This packet uses large arbitrary sizes, and will almost always not fit on a single BLE advertise. The body can be either text based, or binary. The textorbin byte is either set to 1 (text) or 0 (bin)   
+This is a generic data packet, mainly used for user applications. It can be used in response to another packet, usually as a carrier for generic mesh data or system related stuffs. Insanely general purpose. This packet uses large arbitrary sizes, and will almost always not fit on a single BLE advertise. The body can be either text based, or binary. The textorbin byte is either set to 1 (text) or 0 (bin)   
 
-```
 <<header id=1>>(1)  
 <sender luid>(6)  
 <reciever luid>(6)  
 <textorbin>(1)  
 <body>(variable)  
-```
 
-If the reciever mac is all 0s, this is a broadcast packet.
+
 
 
 
 #### Query Services
-This is sent out to ask what software based services the target receiver offers (like filesharing, http-web site, etc.). This is immediately followed by a response in the form of block data. 
+This stanza is used to query a device for futher information not included in a block data stanza
 
-```
-<<header id=2>>(1)  
-
-```
+<<header id=2>>(1)
