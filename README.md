@@ -33,6 +33,13 @@ The scatterbrain protocol's communication is done in predefined 'stanzas'
 #### Advertise
 Used to announce a device and its capabilities. This may not be a physical 'packet' for some systems, as it may use an existing service discovery framework at a lower level.
 
+header id=0(1)  
+device type(1)  
+mobile status(1)  
+protocol version(2)  
+congestion byte(1)  
+hardware services(1) 
+luid(6)
 Device type 
 0: Android  
 1: iOS  
@@ -65,11 +72,11 @@ A random string of 6 bytes, this serves as a unique identifier of a device in a 
 #### Block Data
 This is a generic data packet, mainly used for user applications. It can be used in response to another packet, usually as a carrier for generic mesh data or system related stuffs. Insanely general purpose. This packet uses large arbitrary sizes, and will almost always not fit on a single BLE advertise. The body can be either text based, or binary. The textorbin byte is either set to 1 (text) or 0 (bin)   
 
-<<header id=1>>(1)  
-<sender luid>(6)  
-<reciever luid>(6)  
-<textorbin>(1)  
-<body>(variable)  
+header id=1(1)  
+sender luid(6)  
+reciever luid(6)  
+textorbin(1)  
+body(variable)  
 
 
 
@@ -78,9 +85,9 @@ This is a generic data packet, mainly used for user applications. It can be used
 #### Query Services
 This stanza is used to query a device for futher information not included in a block data stanza
 
-<<header id=2>>(1)
-<<query mask>>(1)
-<<user defined query mask>>(4)
+header id=2(1)
+query mask(1)
+user defined query mask(4)
 
 
 Query mask:
