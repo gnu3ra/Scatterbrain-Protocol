@@ -2,6 +2,7 @@
 Basic protocol for https://github.com/gnu3ra/Scatterbrain.
 High bandwidth internet-less 'lazy mesh' with filesharing, service discovery, and no constant connections needed. NOTE: these specs will be changed/rewritten quite a lot until I get a working prototype. Be careful.
 
+For more info, look at the [Development Blog](https://scatterbrain.xyz)
 
 ## Overall Goals:
 * Adaptable network as a base for many third party protocols
